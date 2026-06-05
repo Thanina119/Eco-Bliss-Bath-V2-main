@@ -38,3 +38,15 @@ ou
 npm install (si vous préférez)
 ```
 
+
+# Pour exécuter les tests
+ Se rendre dans le dossier frontend
+ ```
+ cd frontend
+ ```
+
+ Lancer Cypress
+ ```
+ npx cypress open
+ ou
+ npx cypress run

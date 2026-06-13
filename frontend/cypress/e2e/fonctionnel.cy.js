@@ -53,7 +53,7 @@ describe('TEST FONCTIONNEL -panier', () => {
     })
 
 
-    it('Ne doit pas ajouter un produit ayant un stock inférieur à 1', () => {
+    it('Ne doit pas ajouter un produit contenant un stock inférieur à 1', () => {
 
 
 

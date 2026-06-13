@@ -1,7 +1,7 @@
 
 describe('Smoke test - connexion', () => {
 
-    it('affiche les éléments de connexion', () => {
+    it('doit verifier la presence des éléments de connexion', () => {
 
         cy.visit('http://localhost:4200/#/login')
 
@@ -20,7 +20,7 @@ describe('Smoke test - connexion', () => {
 
 describe('Smoke test - panier', () => {
 
-    it('Vérifie le bouton ajouter au panier après connexion', () => {
+    it('doit verifier la presence du bouton ajouter au panier apres connexion', () => {
 
         cy.visit('http://localhost:4200/#/login')
 

@@ -40,7 +40,7 @@ npm install (si vous préférez)
 
 
 # Pour exécuter les tests
- Se rendre dans le dossier frontend
+ Se placer dans le dossier frontend
  ```
  cd frontend
  ```
@@ -50,3 +50,20 @@ npm install (si vous préférez)
  npx cypress open
  ou
  npx cypress run
+```
+
+
+# Pour générer le rapport
+Se placer dans le dossier frontend
+````
+cd frontend
+````
+Exécuter la commande suivante
+```
+npx cypress run --reporter mochawesome
+```
+
+Le rapport de test est disponible dans le dossier:
+````
+frontend/mochawesome-report/
+```

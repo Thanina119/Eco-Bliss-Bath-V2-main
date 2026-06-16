@@ -1,0 +1,104 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2026-06-16T09:38:02.189Z",
+    "end": "2026-06-16T09:38:03.271Z",
+    "duration": 1082,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e6b499e5-39d6-49bb-9b13-733be2f29009",
+      "title": "",
+      "fullFile": "cypress\\e2e\\xss.cy.js",
+      "file": "cypress\\e2e\\xss.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "eb7acc5f-e210-4ee0-b57c-c14e437fc157",
+          "title": "TEST XSS - commentaire",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": " ne doit pas exécuter du JavaScript injecté",
+              "fullTitle": "TEST XSS - commentaire  ne doit pas exécuter du JavaScript injecté",
+              "timedOut": null,
+              "duration": 955,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://localhost:4200/#/');\ncy.get('[data-cy=\"nav-link-login\"]').click();\ncy.get('[data-cy=\"login-form\"]').should('be.visible');\ncy.get('[data-cy=\"login-input-username\"]').should('be.visible').type('test2@test.fr');\ncy.get('[data-cy=\"login-input-password\"]').should('be.visible').type('testtest');\ncy.get('[data-cy=\"login-submit\"]').should('be.visible').click();\ncy.contains('Voir les produits').should('be.visible');\ncy.visit('http://localhost:4200/#/reviews');\ncy.contains('Votre avis').should('be.visible');\ncy.get('[data-cy=\"review-input-title\"]').should('be.visible');\ncy.get('[data-cy=\"review-input-comment\"]').should('be.visible').type('<script>alert(\"XSS\")</script>');\ncy.on('window:alert', () => {\n  throw new Error('faille XSS détectée');\n});\ncy.get('[data-cy=\"review-submit\"]').click();",
+              "err": {
+                "message": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:4200/\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: connect ECONNREFUSED 127.0.0.1:4200\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer",
+                "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:4200/\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: connect ECONNREFUSED 127.0.0.1:4200\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer\n    at <unknown> (http://localhost:55455/__cypress/runner/cypress_runner.js:131607:74)\n    at visitFailedByErr (http://localhost:55455/__cypress/runner/cypress_runner.js:131006:12)\n    at <unknown> (http://localhost:55455/__cypress/runner/cypress_runner.js:131606:11)\n    at tryCatcher (http://localhost:55455/__cypress/runner/cypress_runner.js:1830:23)\n    at Promise._settlePromiseFromHandler (http://localhost:55455/__cypress/runner/cypress_runner.js:1542:31)\n    at Promise._settlePromise (http://localhost:55455/__cypress/runner/cypress_runner.js:1599:18)\n    at Promise._settlePromise0 (http://localhost:55455/__cypress/runner/cypress_runner.js:1644:10)\n    at Promise._settlePromises (http://localhost:55455/__cypress/runner/cypress_runner.js:1720:18)\n    at _drainQueueStep (http://localhost:55455/__cypress/runner/cypress_runner.js:2430:12)\n    at _drainQueue (http://localhost:55455/__cypress/runner/cypress_runner.js:2423:9)\n    at Async._drainQueues (http://localhost:55455/__cypress/runner/cypress_runner.js:2439:5)\n    at Async.drainQueues (http://localhost:55455/__cypress/runner/cypress_runner.js:2309:14)\nFrom Your Spec Code:\n    at Context.eval (webpack://eco-bliss-bath/./cypress/e2e/xss.cy.js:5:11)\n\nFrom Node.js Internals:\n  Error: connect ECONNREFUSED 127.0.0.1:4200\n      at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1495:16)",
+                "diff": null
+              },
+              "uuid": "3a592a76-4158-4ec0-91ed-5891887a22b7",
+              "parentUUID": "eb7acc5f-e210-4ee0-b57c-c14e437fc157",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "3a592a76-4158-4ec0-91ed-5891887a22b7"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 955,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.2"
+    }
+  }
+}

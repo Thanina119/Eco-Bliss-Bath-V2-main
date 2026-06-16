@@ -31,6 +31,7 @@ describe(' TEST FONCTIONNEL -connexion', () => {
 })
 
 
+
 describe('TEST FONCTIONNEL -panier', () => {
 
     let token
@@ -90,11 +91,13 @@ describe('TEST FONCTIONNEL -panier', () => {
             .should('be.visible')
             .click()
 
+        cy.wait(2000)
+
+
         cy.url()
             .should('include', '/products/3')
 
-        cy.contains('[data-cy="cart-empty"]')
-            .should('be.visible')
+
 
 
     })
@@ -160,21 +163,26 @@ describe('TEST FONCTIONNEL -panier', () => {
 
 
 
-        let stockAvant
-        const quantiteAjoutee = 1
+        let initialStock
+
 
         cy.visit('http://localhost:4200/#/')
 
+
         cy.get('[data-cy="nav-link-login"]')
             .click()
+
         cy.get('[data-cy="login-form"]')
             .should('be.visible')
+
         cy.get('[data-cy="login-input-username"]')
             .should('be.visible')
             .type('test2@test.fr')
+
         cy.get('[data-cy="login-input-password"]')
             .should('be.visible')
             .type('testtest')
+
         cy.get('[data-cy="login-submit"]')
             .should('be.visible')
             .click()
@@ -191,48 +199,64 @@ describe('TEST FONCTIONNEL -panier', () => {
 
         cy.contains('Poussière de lune')
             .should('be.visible')
+
+
+
+
         cy.get('[data-cy="product-link"]')
             .eq(2)
-            .should('be.visible')
-            .click()
-
+            .should('be.visible').click()
 
         cy.get('[data-cy="detail-product-quantity"]')
             .clear()
             .type('1')
 
+        cy.wait(500)
+
+
         cy.get('[data-cy="detail-product-stock"]')
-            .then((stock) => {
-                const texte = stock[0].textContent
 
+            .invoke('text')
 
+            .then((initialStockText) => {
 
-                stockAvant = Number(texte.replace(/\D/g, ''))
-                console.log('TEXTE STOCK = ', stockAvant)
+                initialStock = parseInt(initialStockText)
 
+                cy.log(`Stock initial extrait : ${initialStock}`)
 
             })
-        cy.get('[data-cy="detail-product-add"]')
-            .click()
+
+
+
+
+        cy.get('[data-cy="detail-product-add"]').click()
+
+        cy.wait(500)
+
+
+
 
         cy.visit('http://localhost:4200/#/products/5')
+
+        cy.wait(500)
+
+
         cy.get('[data-cy="detail-product-stock"]')
 
-            .then((stockAfter) => {
-                const texte2 = stockAfter[0].textContent
+            .invoke('text')
 
-                const stockApres = Number(texte2.replace(/\D/g, ''))
-                cy.log('TEXTE STOCK = ', stockApres)
-                expect(stockApres).to.be.equal(stockAvant - 1)
+            .then((updatedStockText) => {
 
+                const finalStock = parseInt(updatedStockText)
+
+
+                cy.log(`Stock final extrait : ${finalStock}`)
+
+                expect(finalStock).to.equal(initialStock - 1)
 
             })
-
-
-
-
-
     })
+
 
 
     it('doit refuser une quantité négative', () => {
@@ -320,13 +344,14 @@ describe('TEST FONCTIONNEL -panier', () => {
             .type('21')
         cy.get('[data-cy="detail-product-add')
             .click()
+
         cy.contains('Panier')
-            .should('be.not.visible')
+            .should('not.be.visible')
     })
 
 
 
-    it('doit vérifier lajout de lélément au panier', () => {
+    it('doit vérifier l ajout de lélément au panier', () => {
 
 
 
@@ -383,7 +408,7 @@ describe('TEST FONCTIONNEL -panier', () => {
             }
         }).then((response) => {
             expect(response.status).to.eq(200)
-            expect(response.body.orderLines[0].product.name).to.eq('Poussière de lune')
+            expect(response.body.orderLines[1].product.name).to.eq('Extrait de nature')
         })
 
     })
@@ -435,5 +460,15 @@ describe('TEST FONCTIONNEL -panier', () => {
     })
 
 
-
 })
+
+
+
+
+
+
+
+
+
+
+

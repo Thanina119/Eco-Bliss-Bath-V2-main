@@ -53,7 +53,7 @@ npm install (si vous préférez)
 ```
 
 
-# Pour générer le rapport
+# Pour générer le rapport de tests
 Se placer dans le dossier frontend
 ````
 cd frontend

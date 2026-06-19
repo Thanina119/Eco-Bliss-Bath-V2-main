@@ -29,9 +29,6 @@ describe('TEST XSS - commentaire', () => {
 
         cy.visit('http://localhost:4200/#/reviews')
 
-
-
-
         cy.contains('Votre avis')
             .should('be.visible')
 
@@ -44,6 +41,8 @@ describe('TEST XSS - commentaire', () => {
 
         cy.get('[data-cy="review-submit"]')
             .click()
+
+        cy.reload()
 
         cy.on('window:alert', () => {
             throw new Error('faille XSS détectée')

@@ -49,7 +49,7 @@ describe('Tests API', () => {
             },
 
             body: {
-                product: 3,
+                product: 6,
                 quantity: 1
             }
         })
@@ -73,9 +73,9 @@ describe('Tests API', () => {
                 expect(response.status).to.eq(200)
 
 
-                expect(response.body.orderLines[0].product.id).to.eq(3)
+                expect(response.body.orderLines[0].product.id).to.eq(6)
 
-                expect(response.body.orderLines[0].product.name).to.eq('Sentiments printaniers')
+                expect(response.body.orderLines[0].product.name).to.eq('Dans la forêt')
 
                 expect(response.body.orderLines[0].quantity).to.eq(1)
             })

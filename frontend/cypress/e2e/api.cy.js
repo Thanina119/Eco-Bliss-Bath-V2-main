@@ -1,5 +1,24 @@
 let token
-describe('API - GET /orders sans connexion', () => {
+describe('Tests API', () => {
+
+
+    before(() => {
+        cy.request({
+            method: 'GET',
+            url: 'http://localhost:8081/login',
+            body: {
+                "username": "test2@test.fr",
+                "password": "testtest"
+            }
+
+        })
+
+            .then((response) => {
+                expect(response.body).to.have.property("token")
+                token = response.body.token
+            })
+    })
+
 
     it('doit retourner 403 si utilisateur non disposant des bons droits', () => {
 
@@ -17,27 +36,6 @@ describe('API - GET /orders sans connexion', () => {
 
 
 
-})
-
-describe('API-GET/orders', () => {
-
-    before(() => {
-        cy.request({
-            method: 'GET',
-            url: 'http://localhost:8081/login',
-            body: {
-                "username": "test2@test.fr",
-                "password": "testtest"
-            }
-
-        })
-
-            .then((response) => {
-                expect(response.body).to.have.property("token")
-                token = response.body.token
-            })
-    }
-    )
 
     it('doit retourner la liste des produits qui sont dans le panier', () => {
 
@@ -82,13 +80,7 @@ describe('API-GET/orders', () => {
                 expect(response.body.orderLines[0].quantity).to.eq(1)
             })
     })
-})
 
-
-
-
-
-describe('API -GET /products id', () => {
 
 
 
@@ -115,10 +107,7 @@ describe('API -GET /products id', () => {
 
     })
 
-})
 
-
-describe('API- POST/ login', () => {
 
     it('doit retourner 200 si utilisateur connu', () => {
 
@@ -135,6 +124,7 @@ describe('API- POST/ login', () => {
                 expect(response.status).to.eq(200)
             })
     })
+
 
     it('doit retourner 401 si utilisateur inconnu', () => {
 
@@ -155,28 +145,8 @@ describe('API- POST/ login', () => {
             })
     })
 
-})
 
 
-describe('API - POST/orders add', () => {
-
-    before(() => {
-        cy.request({
-            method: 'POST',
-            url: 'http://localhost:8081/login',
-            body: {
-                "username": "test2@test.fr",
-                "password": "testtest"
-            }
-
-        })
-
-            .then((response) => {
-                expect(response.body).to.have.property("token")
-                token = response.body.token
-            })
-    }
-    )
 
     it('doit ajouter un produit disponible au panier', () => {
 
@@ -207,28 +177,10 @@ describe('API - POST/orders add', () => {
             })
     })
 
-})
 
 
-describe('API -POST/orders add', () => {
 
-    before(() => {
-        cy.request({
-            method: 'GET',
-            url: 'http://localhost:8081/login',
-            body: {
-                "username": "test2@test.fr",
-                "password": "testtest"
-            }
 
-        })
-
-            .then((response) => {
-                expect(response.body).to.have.property("token")
-                token = response.body.token
-            })
-    }
-    )
 
     it('ne doit pas ajouter un produit en rupture de stock', () => {
 
@@ -252,28 +204,10 @@ describe('API -POST/orders add', () => {
                 expect(response.status).to.eq(400)
             })
     })
-})
 
 
-describe('API -POST/reviews', () => {
 
-    before(() => {
-        cy.request({
-            method: 'GET',
-            url: 'http://localhost:8081/login',
-            body: {
-                "username": "test2@test.fr",
-                "password": "testtest"
-            }
 
-        })
-
-            .then((response) => {
-                expect(response.body).to.have.property("token")
-                token = response.body.token
-            })
-    }
-    )
 
     it('doit ajouter un avis', () => {
         cy.request({
@@ -295,4 +229,5 @@ describe('API -POST/reviews', () => {
 
             })
     })
+
 })

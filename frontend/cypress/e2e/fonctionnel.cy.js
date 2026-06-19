@@ -91,14 +91,8 @@ describe('TEST FONCTIONNEL -panier', () => {
             .should('be.visible')
             .click()
 
-        cy.wait(2000)
-
-
-        cy.url()
-            .should('include', '/products/3')
-
-
-
+        cy.contains('Panier')
+            .should('not.exist')
 
     })
 
@@ -216,6 +210,7 @@ describe('TEST FONCTIONNEL -panier', () => {
 
         cy.get('[data-cy="detail-product-stock"]')
 
+
             .invoke('text')
 
             .then((initialStockText) => {
@@ -231,17 +226,12 @@ describe('TEST FONCTIONNEL -panier', () => {
 
         cy.get('[data-cy="detail-product-add"]').click()
 
-        cy.wait(500)
-
-
-
 
         cy.visit('http://localhost:4200/#/products/5')
 
-        cy.wait(500)
-
 
         cy.get('[data-cy="detail-product-stock"]')
+
 
             .invoke('text')
 
@@ -293,9 +283,6 @@ describe('TEST FONCTIONNEL -panier', () => {
             .click()
 
 
-
-
-
         cy.get('[data-cy="detail-product-quantity"]')
             .clear()
             .type('-1')
@@ -342,11 +329,13 @@ describe('TEST FONCTIONNEL -panier', () => {
         cy.get('[data-cy="detail-product-quantity"]')
             .clear()
             .type('21')
-        cy.get('[data-cy="detail-product-add')
+
+        cy.get('[data-cy="detail-product-add"]')
             .click()
 
         cy.contains('Panier')
             .should('not.be.visible')
+
     })
 
 
@@ -394,9 +383,6 @@ describe('TEST FONCTIONNEL -panier', () => {
         cy.get('[data-cy="detail-product-add"]')
             .should('be.visible')
             .click()
-
-
-
 
 
 

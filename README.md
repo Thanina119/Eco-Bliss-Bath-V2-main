@@ -22,7 +22,7 @@ Clonez le projet pour le récupérer
 git clone https://github.com/OpenClassrooms-Student-Center/Eco-Bliss-Bath-V2.git
 cd Eco-Bliss-Bath-V2
 ```
-Pour démarrer l'API avec ça base de données.
+Pour démarrer l'API avec sa base de données.
 ```
 docker compose up -d
 ```

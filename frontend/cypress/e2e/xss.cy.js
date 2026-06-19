@@ -42,14 +42,12 @@ describe('TEST XSS - commentaire', () => {
             .should('be.visible')
             .type('<script>alert("XSS")</script>')
 
+        cy.get('[data-cy="review-submit"]')
+            .click()
 
         cy.on('window:alert', () => {
             throw new Error('faille XSS détectée')
         })
-        cy.get('[data-cy="review-submit"]')
-            .click()
-
-
 
     })
 })
